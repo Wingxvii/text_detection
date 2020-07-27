@@ -94,12 +94,12 @@ def saveBoxes(boxes, image, basename = 'test'):
 			counter += 1
 
 # Function that returns true or false, for if an image exists within the bounding box
-def check_image(image, startX, startY, endX, endY, bufferX_start = 0, bufferY_start = 0, bufferX_end = 0, bufferY_end = 0):
+def check_image(image, startX, startY, endX, endY, buffer = 0):
 
-	startX -= bufferX_start
-	startY -= bufferY_start
-	endX += bufferX_end
-	endY += bufferY_end
+	startX -= buffer
+	startY -= buffer
+	endX += buffer
+	endY += buffer
 
 	stencil = np.zeros(image.shape).astype(image.dtype)
 	contours = [np.array([[startX, startY],[startX,endY],[endX,endY],[endX,startY]])]
