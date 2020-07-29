@@ -64,12 +64,7 @@ def cutBoxes(boxes, image):
 	return images
 
 # Function returns output boxes in memory
-def gray_out(image, startX, startY, endX, endY, buffer = 0):
-	startX -= buffer
-	startY -= buffer
-	endX += buffer
-	endY += buffer
-
+def gray_out(image, startX, startY, endX, endY):
 	stencil = np.zeros(image.shape).astype(image.dtype)
 	contours = [np.array([[startX, startY],[startX,endY],[endX,endY],[endX,startY]])]
 	color = [255, 255, 255]
@@ -240,7 +235,7 @@ while(video.isOpened()):
 
 	# Use Example
 	if ret is True:
-		if check_image(frame, 269, 232, 359, 254, 6, 6, 6, 6) is True:
+		if check_image(frame, 269, 232, 359, 254, 6) is True:
 			print("Found!")
 
 		'''
