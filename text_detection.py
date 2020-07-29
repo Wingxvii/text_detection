@@ -64,7 +64,7 @@ def cutBoxes(boxes, image):
 	return images
 
 # Function returns output boxes in memory
-def gray_out(image, startX, startY, endX, endY):
+def gray_out(image, startX, startY, endX, endY, buffer = 0):
 	startX -= buffer
 	startY -= buffer
 	endX += buffer
