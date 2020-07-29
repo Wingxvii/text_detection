@@ -63,6 +63,21 @@ def cutBoxes(boxes, image):
 
 	return images
 
+# Function returns output boxes in memory
+def gray_out(image, startX, startY, endX, endY):
+	startX -= buffer
+	startY -= buffer
+	endX += buffer
+	endY += buffer
+
+	stencil = np.zeros(image.shape).astype(image.dtype)
+	contours = [np.array([[startX, startY],[startX,endY],[endX,endY],[endX,startY]])]
+	color = [255, 255, 255]
+	cv2.fillPoly(stencil, contours, color)
+	result = cv2.bitwise_and(image, stencil)
+
+	return result
+
 # Function that saves output boxes in storage
 def saveBoxes(boxes, image, basename = 'test'):
 	counter = 0
