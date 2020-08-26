@@ -1,3 +1,10 @@
+"""
+.. module:: text_detection
+   :synopsis: Detects text from input images
+
+.. moduleauthor:: John Wang <john.wang@uoit.net>
+"""
+
 from imutils.object_detection import non_max_suppression
 import numpy as np
 import argparse
@@ -6,18 +13,31 @@ import cv2
 import glob
 import os
 
+# confidence value
 conf = 0.9
+
+# resize value
 width = 640 # must be multiple of 32
 height = 352 # must be multiple of 32
 
 # load the input image and grab the image dimensions
 outputFolder = "C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/opencv-text-detection/Cropped/{}-{}.png"
 
+# size ratios
 rW = 1
 rH = 1
 
-# Function that draws boxes on
+
 def drawBoxes(boxes, frame):
+	"""
+	Draw boxes over detected text
+
+	:param boxes: array of boxes coordinates in order of startX, startY, endX, endY
+	:type boxes: int[[]]
+	:param frame: source cv image matrix
+	:type frame: mat
+	"""
+
 	# loop over the bounding boxes
 	for (startX, startY, endX, endY) in boxes:
 		# scale the bounding box coordinates based on the respective
@@ -34,8 +54,20 @@ def drawBoxes(boxes, frame):
 		cv2.imshow("Text Detection", frame)
 		cv2.waitKey(0)
 
+
 # Function returns output boxes in memory
 def cutBoxes(boxes, image):
+	"""
+	Cut images using detected boxes and returns it
+
+	:param boxes: array of boxes coordinates in order of startX, startY, endX, endY
+	:type boxes: int[[]]
+	:param image: source cv image matrix
+	:type image: mat
+	:return: list of cut text cv image matrices
+	:rtype: mat[]
+	"""
+
 	buffer = 4
 	images = []
 	# loop over the bounding boxes
@@ -63,8 +95,24 @@ def cutBoxes(boxes, image):
 
 	return images
 
-# Function returns output boxes in memory
+
 def gray_out(image, startX, startY, endX, endY):
+	"""
+	Grays out inverse of detected boxes, perserving image sizes
+
+	:param image: source cv image matrix
+	:type image: mat
+	:param startX: first coordinates for x axis
+	:type startX: int
+	:param startY: first coordinates for y axis
+	:type startY: int
+	:param endX: second coordinates for x axis
+	:type endX: int
+	:param endY: second coordinates for y axis
+	:type endY: int
+	:return: grayed out image cv image matrix
+	:rtype: mat
+	"""
 	stencil = np.zeros(image.shape).astype(image.dtype)
 	contours = [np.array([[startX, startY],[startX,endY],[endX,endY],[endX,startY]])]
 	color = [255, 255, 255]
@@ -73,8 +121,18 @@ def gray_out(image, startX, startY, endX, endY):
 
 	return result
 
-# Function that saves output boxes in storage
-def saveBoxes(boxes, image, basename = 'test'):
+
+def saveBoxes(boxes, image, basename='test'):
+	"""
+	Saves detected boxes to disk
+
+	:param boxes: array of boxes coordinates in order of startX, startY, endX, endY
+	:type boxes: int[[]]
+	:param image: source cv image matrix
+	:type image: mat
+	:param basename: filename prefix
+	:type basename: str
+	"""
 	counter = 0
 	buffer = 4
 	# loop over the bounding boxes
@@ -103,8 +161,26 @@ def saveBoxes(boxes, image, basename = 'test'):
 			cv2.imwrite(outputFolder.format(basename, counter), newImage)
 			counter += 1
 
-# Function that returns true or false, for if an image exists within the bounding box
-def check_image(image, startX, startY, endX, endY, buffer = 0):
+
+def check_image(image, startX, startY, endX, endY, buffer=0):
+	"""
+	Function that returns true or false, for if an image exists within the bounding box
+
+	:param image: source cv image matrix
+	:type image: mat
+	:param startX: first coordinates for x axis
+	:type startX: int
+	:param startY: first coordinates for y axis
+	:type startY: int
+	:param endX: second coordinates for x axis
+	:type endX: int
+	:param endY: second coordinates for y axis
+	:type endY: int
+	:param buffer: image detection pixel buffer size
+	:type buffer: int
+	:return: wether text was found
+	:rtype: bool
+	"""
 
 	startX -= buffer
 	startY -= buffer
@@ -128,6 +204,14 @@ def check_image(image, startX, startY, endX, endY, buffer = 0):
 
 # Detection method
 def detect(image):
+	"""
+	Function to perform detection on an image
+
+	:param image: source cv image matrix to perform detection
+	:type image: mat
+	:return: detected boxes list by it's coordinates in order of startX, startY, endX, endY
+	:rtype: int[[]]
+	"""
 	global rW
 	global rH
 
@@ -220,6 +304,11 @@ def detect(image):
 	# drawBoxes(boxes, orig)
 	return boxes
 
+
+"""
+Example Use Code
+
+
 video = cv2.VideoCapture('C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/candycrush.mp4')
 counter = 0
 iterator = 0
@@ -256,3 +345,4 @@ video.release()
 
 # Closes all the frame
 cv2.destroyAllWindows()
+"""
