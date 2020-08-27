@@ -17,11 +17,9 @@ import os
 conf = 0.9
 
 # resize value
-width = 640 # must be multiple of 32
-height = 352 # must be multiple of 32
+width = 768 # must be multiple of 32
+height = 1024 # must be multiple of 32
 
-# load the input image and grab the image dimensions
-outputFolder = "C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/opencv-text-detection/Cropped/{}-{}.png"
 
 # size ratios
 rW = 1
@@ -122,7 +120,7 @@ def gray_out(image, startX, startY, endX, endY):
 	return result
 
 
-def saveBoxes(boxes, image, basename='test'):
+def saveBoxes(boxes, image, outputFolder, ext, basename='test', counter_progress=0):
 	"""
 	Saves detected boxes to disk
 
@@ -130,10 +128,20 @@ def saveBoxes(boxes, image, basename='test'):
 	:type boxes: int[[]]
 	:param image: source cv image matrix
 	:type image: mat
+	:param outputFolder: output file path
+	:type outputFolder: str
+	:param ext: file extention
+	:type ext: str
 	:param basename: filename prefix
 	:type basename: str
+	:param counter_progress: progress from prior image detections
+	:type counter_progress: int
+	:return: counter value after detection (for file saving iteration)
+	:rtype: int
 	"""
-	counter = 0
+	form = "{}-{}."
+
+	counter = counter_progress
 	buffer = 4
 	# loop over the bounding boxes
 	for (startX, startY, endX, endY) in boxes:
@@ -158,9 +166,10 @@ def saveBoxes(boxes, image, basename='test'):
 		newImage = image[startY:endY, startX:endX]
 
 		if image is not None:
-			cv2.imwrite(outputFolder.format(basename, counter), newImage)
+			cv2.imwrite(outputFolder + form.format(basename, counter) + ext, newImage)
 			counter += 1
 
+	return counter
 
 def check_image(image, startX, startY, endX, endY, buffer=0):
 	"""
@@ -241,7 +250,7 @@ def detect(image):
 	net.setInput(blob)
 	(scores, geometry) = net.forward(layerNames)
 	end = time.time()
-	print("[INFO] text detection took {:.6f} seconds".format(end - start))
+	print("text detection took {:.6f} seconds".format(end - start))
 
 	# grab the number of rows and columns from the scores volume, then
 	# initialize our set of bounding box rectangles and corresponding
@@ -305,6 +314,19 @@ def detect(image):
 	return boxes
 
 
+files = glob.glob("C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/TestData/4/*.png")
+
+outputFolder = "C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/TestData/4/text/"
+
+image_it = 1
+count = 0
+for file in files:
+	frame = cv2.imread(file)
+	print("Detecting image {}".format(image_it))
+	boxes = detect(frame)
+	count = saveBoxes(boxes, frame, outputFolder, "png", "detected", count)
+	image_it += 1
+
 """
 Example Use Code
 
@@ -346,3 +368,4 @@ video.release()
 # Closes all the frame
 cv2.destroyAllWindows()
 """
+
