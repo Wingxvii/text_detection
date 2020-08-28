@@ -314,9 +314,9 @@ def detect(image):
 	return boxes
 
 
-files = glob.glob("C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/TestData/4/*.png")
+files = glob.glob("C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/TestData/1/*.png")
 
-outputFolder = "C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/TestData/4/text/"
+outputFolder = "C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/TestData/1/text/"
 
 image_it = 1
 count = 0

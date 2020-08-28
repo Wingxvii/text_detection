@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Text Detection’s documentation! &#8212; Text Detection Aug 28th 2020 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Text Detection Aug 28th 2020 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to Text Detection’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-text_detection">
+<span id="welcome-to-text-detection-s-documentation"></span><h1>Welcome to Text Detection’s documentation!<a class="headerlink" href="#module-text_detection" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-0"></span><dl class="py function">
+<dt id="text_detection.check_image">
+<code class="sig-prename descclassname">text_detection.</code><code class="sig-name descname">check_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">startX</span></em>, <em class="sig-param"><span class="n">startY</span></em>, <em class="sig-param"><span class="n">endX</span></em>, <em class="sig-param"><span class="n">endY</span></em>, <em class="sig-param"><span class="n">buffer</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#text_detection.check_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that returns true or false, for if an image exists within the bounding box</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>mat</em>) – source cv image matrix</p></li>
+<li><p><strong>startX</strong> (<em>int</em>) – first coordinates for x axis</p></li>
+<li><p><strong>startY</strong> (<em>int</em>) – first coordinates for y axis</p></li>
+<li><p><strong>endX</strong> (<em>int</em>) – second coordinates for x axis</p></li>
+<li><p><strong>endY</strong> (<em>int</em>) – second coordinates for y axis</p></li>
+<li><p><strong>buffer</strong> (<em>int</em>) – image detection pixel buffer size</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>wether text was found</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="text_detection.cutBoxes">
+<code class="sig-prename descclassname">text_detection.</code><code class="sig-name descname">cutBoxes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">image</span></em><span class="sig-paren">)</span><a class="headerlink" href="#text_detection.cutBoxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cut images using detected boxes and returns it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>boxes</strong> (<em>int</em><em>[</em><em>[</em><em>]</em><em>]</em>) – array of boxes coordinates in order of startX, startY, endX, endY</p></li>
+<li><p><strong>image</strong> (<em>mat</em>) – source cv image matrix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of cut text cv image matrices</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>mat[]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="text_detection.detect">
+<code class="sig-prename descclassname">text_detection.</code><code class="sig-name descname">detect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em><span class="sig-paren">)</span><a class="headerlink" href="#text_detection.detect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to perform detection on an image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> (<em>mat</em>) – source cv image matrix to perform detection</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>detected boxes list by it’s coordinates in order of startX, startY, endX, endY</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int[[]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="text_detection.drawBoxes">
+<code class="sig-prename descclassname">text_detection.</code><code class="sig-name descname">drawBoxes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">frame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#text_detection.drawBoxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw boxes over detected text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>boxes</strong> (<em>int</em><em>[</em><em>[</em><em>]</em><em>]</em>) – array of boxes coordinates in order of startX, startY, endX, endY</p></li>
+<li><p><strong>frame</strong> (<em>mat</em>) – source cv image matrix</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="text_detection.gray_out">
+<code class="sig-prename descclassname">text_detection.</code><code class="sig-name descname">gray_out</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">startX</span></em>, <em class="sig-param"><span class="n">startY</span></em>, <em class="sig-param"><span class="n">endX</span></em>, <em class="sig-param"><span class="n">endY</span></em><span class="sig-paren">)</span><a class="headerlink" href="#text_detection.gray_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grays out inverse of detected boxes, perserving image sizes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>mat</em>) – source cv image matrix</p></li>
+<li><p><strong>startX</strong> (<em>int</em>) – first coordinates for x axis</p></li>
+<li><p><strong>startY</strong> (<em>int</em>) – first coordinates for y axis</p></li>
+<li><p><strong>endX</strong> (<em>int</em>) – second coordinates for x axis</p></li>
+<li><p><strong>endY</strong> (<em>int</em>) – second coordinates for y axis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>grayed out image cv image matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>mat</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="text_detection.saveBoxes">
+<code class="sig-prename descclassname">text_detection.</code><code class="sig-name descname">saveBoxes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">outputFolder</span></em>, <em class="sig-param"><span class="n">ext</span></em>, <em class="sig-param"><span class="n">basename</span><span class="o">=</span><span class="default_value">'test'</span></em>, <em class="sig-param"><span class="n">counter_progress</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#text_detection.saveBoxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves detected boxes to disk</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>boxes</strong> (<em>int</em><em>[</em><em>[</em><em>]</em><em>]</em>) – array of boxes coordinates in order of startX, startY, endX, endY</p></li>
+<li><p><strong>image</strong> (<em>mat</em>) – source cv image matrix</p></li>
+<li><p><strong>outputFolder</strong> (<em>str</em>) – output file path</p></li>
+<li><p><strong>ext</strong> (<em>str</em>) – file extention</p></li>
+<li><p><strong>basename</strong> (<em>str</em>) – filename prefix</p></li>
+<li><p><strong>counter_progress</strong> (<em>int</em>) – progress from prior image detections</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>counter value after detection (for file saving iteration)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-extract_images"></span><span class="target" id="module-1"></span><dl class="py function">
+<dt id="extract_images.extract">
+<code class="sig-prename descclassname">extract_images.</code><code class="sig-name descname">extract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">basename</span></em>, <em class="sig-param"><span class="n">crop</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">volume</span><span class="o">=</span><span class="default_value">5000</span></em>, <em class="sig-param"><span class="n">frequency</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">244</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">244</span></em>, <em class="sig-param"><span class="n">ext</span><span class="o">=</span><span class="default_value">'jpg'</span></em>, <em class="sig-param"><span class="n">output</span><span class="o">=</span><span class="default_value">'C:/Users/turnt/OneDrive/Desktop/Rob0Workspace/Outputs/'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#extract_images.extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts images from a video, then saves it to a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input</strong> (<em>str</em>) – filepath for input video</p></li>
+<li><p><strong>basename</strong> (<em>str</em>) – name for output images</p></li>
+<li><p><strong>crop</strong> (<em>bool</em>) – wether to crop or resize</p></li>
+<li><p><strong>volume</strong> (<em>int</em>) – max amount of images to output</p></li>
+<li><p><strong>frequency</strong> (<em>int</em>) – amount of images to skip</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – height size for image output size</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – width size for image output size</p></li>
+<li><p><strong>ext</strong> (<em>str</em>) – file extention</p></li>
+<li><p><strong>output</strong> (<em>str</em>) – output file path</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to Text Detection’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Text Detection Aug 28th 2020 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to Text Detection’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, John Wang.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>
